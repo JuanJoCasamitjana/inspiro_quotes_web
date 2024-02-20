@@ -1,0 +1,8 @@
+{{define "navbar"}}
+<nav>
+    <ul style="display: flex;">
+        <li class="clickable" hx-get="/quotes?page=1" hx-target="#main-app">List quotes</li>
+        <li class="clickable" hx-get="/genres" hx-target="#main-app">Genres</li>
+    </ul>
+</nav>
+{{end}}

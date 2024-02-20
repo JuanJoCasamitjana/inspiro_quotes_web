@@ -1,0 +1,14 @@
+{{define "quote"}}
+<div class="container">
+    <p style="font-size: 3rem;"><em>{{.Text}}</em></p>
+    <p style="font-size: 1.5rem;">by {{.Author}}</p>
+    <p>{{.Genre}}</p>
+    <button hx-get="/quotes?page=1" hx-swap="innerHTML" hx-target="#main-app"
+    class="button">Back home</button>
+    <button hx-get="/quotes/{{.ID}}/search-images" hx-swap="innerHTML" hx-target="#images"
+    class="button">Search related images</button>
+    <button hx-get="/quotes/{{.ID}}/images" hx-swap="innerHTML" hx-target="#images"
+    class="button">Load related images</button>
+    <div id="images"></div>
+</div>
+{{end}}

@@ -1,0 +1,15 @@
+{{define "images"}}
+<div class="container">
+    <div class="grid-container halves">
+        {{range .}}
+        <div style="border: 1px solid var(--color-5);">
+            <img src="{{.imageURL}}" alt="from {{.source}} by {{.author}}" 
+            style="object-fit: cover; max-height: 20rem;">
+            <p>from {{.source}}</p>
+            <button hx-get="/generate/image/{{.id}}" hx-target="#main-app"
+            style="margin-bottom: 1rem;" class="button-primary">Generate poster</button>
+        </div>
+        {{end}}
+    </div>
+</div>
+{{end}}

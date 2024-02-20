@@ -1,0 +1,18 @@
+{{define "index"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/static/htmx.min.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Inspiro quotes</title>
+</head>
+<body>
+    {{template "navbar" .}}
+    <div id="main-app">
+        <div hx-get="/quotes?page=1" hx-swap="outerHTML" hx-trigger="load"></div>
+    </div>
+</body>
+</html>
+{{end}}

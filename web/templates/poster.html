@@ -1,0 +1,8 @@
+{{define "poster"}}
+<div class="container" style="border: solid 1px var(--color-5); margin-top: 2rem;">
+    <p style="font-size: 3rem; margin-left: 2rem;"><em>{{.quote}}</em></p>
+    <p style="font-size: 1.5rem; margin-left: 2rem;">by {{.author}}</p>
+    <img src="data:image/jpeg;base64,{{.image}}" alt="Poster for {{.quote}} by {{.author}}" 
+    style="object-fit: cover; max-width: 80%; margin-left: 10%;">
+</div>
+{{end}}

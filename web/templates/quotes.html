@@ -1,0 +1,19 @@
+{{define "quotes"}}
+<div class="container">
+    <div class="grid-container halves">
+        {{range .quotes}}
+        <div hx-get="/quotes/{{.ID}}" hx-swap="innerHTML" hx-target="#main-app" hx-trigger="click"
+        style="border: 1px solid var(--color-5); cursor: pointer;">
+            <p style="font-size: 3rem;"><em>{{.Text}}</em></p>
+            <p style="font-size: 1.5rem;">by {{.Author}}</p>
+            <p>{{.Genre}}</p>
+        </div>
+        {{end}}
+    </div>
+</div>
+{{if and .genre .more}}
+<div style="min-height: 2rem;" hx-get="/genres/{{.genre}}?page={{.next}}" hx-swap="outerHTML" hx-trigger="revealed"></div>
+{{else if .more}}
+<div style="min-height: 2rem;" hx-get="/quotes?page={{.next}}" hx-swap="outerHTML" hx-trigger="revealed"></div>
+{{end}}
+{{end}}

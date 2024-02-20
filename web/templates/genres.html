@@ -1,0 +1,12 @@
+{{define "genres"}}
+<div class="container">
+    <div class="grid-conatiner fifths">
+        {{range .}}
+        <div class="clickable" hx-get="/genres/{{.}}?page=1" hx-target="#main-app"
+        style="margin-top: 1rem;">
+            <p>{{.}}</p>
+        </div>
+        {{end}}
+    </div>
+</div>
+{{end}}
