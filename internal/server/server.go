@@ -9,7 +9,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func SetupAndRun() {
+func SetupAndRun(port string) {
 	e := echo.New()
 	quotes.InitDB()
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
@@ -19,7 +19,7 @@ func SetupAndRun() {
 	e.Renderer = NewTemplates()
 	e.Static("/static", "web/static")
 	quotes.SetupRoutes(e)
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start(port))
 }
 
 type Templates struct {
