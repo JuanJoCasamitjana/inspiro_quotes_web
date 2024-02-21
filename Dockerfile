@@ -8,4 +8,4 @@ RUN go build -o app ./cmd/app/main.go
 
 EXPOSE 8080
 
-CMD ["./app", "-action", "init-run", "-port", ":8080"]
+CMD ["./app", "-action", "init-run", "-port", ":$PORT"]
