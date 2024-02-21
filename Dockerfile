@@ -1,6 +1,6 @@
 FROM golang:1.21.6-alpine
 
-RUN apk update && apk add --no-cache gcc
+RUN apk update && apk add --no-cache build-essential
 
 ENV CGO_ENABLED=1
 
