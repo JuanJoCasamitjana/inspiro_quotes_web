@@ -12,6 +12,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/glebarez/sqlite"
 	"golang.org/x/term"
 	"gorm.io/gorm"
 )
@@ -47,8 +48,8 @@ Default is run.`)
 	case "run":
 		server.SetupAndRun(port)
 	case "init-run":
-		server.SetupAndRun(port)
 		InitializeDB()
+		server.SetupAndRun(port)
 	case "full":
 		server.SetupAndRun(port)
 		InitializeDB()
@@ -60,6 +61,12 @@ Default is run.`)
 }
 
 func InitializeDB() {
+	var err error
+	DB, err := gorm.Open(sqlite.Open("quotes.db"), &gorm.Config{})
+	if err != nil {
+		panic("failed to connect database")
+	}
+	DB.AutoMigrate(&quotes.Quote{}, &quotes.SuperUser{}, &quotes.ImageForQuote{})
 	log.Println("Initializing database")
 	file, err := os.Open("quotes.csv")
 	if err != nil {
@@ -94,14 +101,19 @@ func InitializeDB() {
 	num_errors := 0
 	for _, q := range threeRandomQuotes {
 		var quo quotes.Quote
-		err := quotes.DB.Where("text = ?", q.Text).First(&quo).Error
+		err := DB.Where("text = ?", q.Text).First(&quo).Error
 		if err == gorm.ErrRecordNotFound {
 			num_errors++
 		}
 	}
 	log.Println("Saving all quotes to the database")
 	if num_errors == 3 {
-		quotes.CreateManyQuotes(quotes_list)
+		DB.Transaction(func(tx *gorm.DB) error {
+			if err := tx.CreateInBatches(&quotes_list, 200).Error; err != nil {
+				return err
+			}
+			return nil
+		})
 	}
 }
 
