@@ -4,12 +4,18 @@ import (
 	"html/template"
 	"inspiro_quotes_web/internal/quotes"
 	"io"
+	"os"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
 func SetupAndRun(port string) {
+	env_port := os.Getenv("PORT")
+	if env_port != "" {
+		port = env_port
+	}
+	port = ":" + port
 	e := echo.New()
 	quotes.InitDB()
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
@@ -19,7 +25,7 @@ func SetupAndRun(port string) {
 	e.Renderer = NewTemplates()
 	e.Static("/static", "web/static")
 	quotes.SetupRoutes(e)
-	e.Logger.Fatal(e.Start(port))
+	e.Logger.Fatal(e.Start("0.0.0.0" + port))
 }
 
 type Templates struct {
