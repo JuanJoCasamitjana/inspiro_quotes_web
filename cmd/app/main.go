@@ -34,6 +34,11 @@ Default is run.`)
 	flag.StringVar(&port, "port", ":8080", "Port to run the server on")
 	flag.Parse()
 
+	env_action := os.Getenv("ACTION")
+	if env_action != "" {
+		action = env_action
+	}
+
 	switch action {
 	case "init":
 		InitializeDB()
