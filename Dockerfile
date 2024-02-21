@@ -5,9 +5,6 @@ RUN apk update && apk add --no-cache gcc
 ENV CGO_ENABLED=1 \
     CC=gcc 
 
-WORKDIR /app
-
-COPY . .
 
 RUN go build -o app ./cmd/app/main.go
 
