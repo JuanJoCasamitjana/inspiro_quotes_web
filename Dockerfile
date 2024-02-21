@@ -1,10 +1,8 @@
 FROM golang:1.21.6-alpine
 
-RUN apk update && apk add --no-cache gcc
+WORKDIR /app
 
-ENV CGO_ENABLED=1 \
-    CC=gcc 
-
+COPY . .
 
 RUN go build -o app ./cmd/app/main.go
 

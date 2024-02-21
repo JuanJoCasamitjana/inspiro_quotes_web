@@ -239,7 +239,7 @@ func requestImages(qt string) []map[string]string {
 func getImageFromUrl(url string) []byte {
 	response, err := http.Get(url)
 	if err != nil {
-		log.Println("Error downloading image: ", err)
+		return nil
 	}
 	defer response.Body.Close()
 	body, err := io.ReadAll(response.Body)
