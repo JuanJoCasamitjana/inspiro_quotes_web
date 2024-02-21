@@ -7,7 +7,7 @@
     class="button">Back home</button>
     <button hx-get="/quotes/{{.ID}}/search-images" hx-swap="innerHTML" hx-target="#images"
     class="button">Search related images</button>
-    <button hx-get="/quotes/{{.ID}}/images" hx-swap="innerHTML" hx-target="#images"
+    <button hx-get="/quotes/{{.ID}}/images" hx-swap="innerHTML" hx-target="#images" hx-trigger="click, load"
     class="button">Load related images</button>
     <div id="images"></div>
 </div>

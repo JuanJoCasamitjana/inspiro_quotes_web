@@ -42,12 +42,12 @@ Default is run.`)
 	case "run":
 		server.SetupAndRun(port)
 	case "init-run":
-		InitializeDB()
 		server.SetupAndRun(port)
+		InitializeDB()
 	case "full":
+		server.SetupAndRun(port)
 		InitializeDB()
 		CreateAdminFromEnv()
-		server.SetupAndRun(port)
 	default:
 		log.Fatal("Invalid action")
 	}
