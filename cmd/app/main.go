@@ -55,6 +55,7 @@ Default is run.`)
 }
 
 func InitializeDB() {
+	log.Println("Initializing database")
 	file, err := os.Open("quotes.csv")
 	if err != nil {
 		log.Fatal(err)
@@ -73,6 +74,7 @@ func InitializeDB() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Println("Creating quotes, total:", len(records))
 	quotes_list := make([]*quotes.Quote, len(records))
 	for i, record := range records {
 		quotes_list[i] = &quotes.Quote{
@@ -92,6 +94,7 @@ func InitializeDB() {
 			num_errors++
 		}
 	}
+	log.Println("Saving all quotes to the database")
 	if num_errors == 3 {
 		quotes.CreateManyQuotes(quotes_list)
 	}

@@ -1,6 +1,8 @@
 package quotes
 
 import (
+	"log"
+
 	"github.com/glebarez/sqlite"
 	"gorm.io/gorm"
 )
@@ -14,7 +16,7 @@ func InitDB() {
 		panic("failed to connect database")
 	}
 	DB.AutoMigrate(&Quote{}, &SuperUser{}, &ImageForQuote{})
-
+	log.Println("Database connection initialized")
 }
 
 func CreateQuote(quote *Quote) error {
