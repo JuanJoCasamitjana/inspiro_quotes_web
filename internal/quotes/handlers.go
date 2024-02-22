@@ -346,7 +346,6 @@ func select_a_random_font() string {
 		log.Println(err)
 	}
 	max_index := len(files) - 1
-	println(max_index)
 	random_index := rand.Intn(max_index)
 	selected_font := files[random_index].Name()
 	return selected_font
