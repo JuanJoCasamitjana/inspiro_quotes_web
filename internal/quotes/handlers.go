@@ -254,9 +254,6 @@ func editImage(image []byte, quote, author string) []byte {
 	if err != nil {
 		return nil
 	}
-	if err != nil {
-		return nil
-	}
 	dc := gg.NewContextForImage(img)
 	fontPath := "./web/fonts/" + select_a_random_font()
 	err = dc.LoadFontFace(fontPath, 40)
